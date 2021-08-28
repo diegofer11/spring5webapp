@@ -9,11 +9,26 @@ import java.util.UUID;
 public class ProductServiceImpl implements ProductService {
     @Override
     public ProductDto getProductById(UUID productId) {
+        //TODO buscar registro no quemado
         return ProductDto.builder()
                 .id(UUID.randomUUID())
                 .productName("producto de prueba")
                 .sku("345234")
                 .upc(158000L)
                 .build();
+    }
+
+    @Override
+    public ProductDto saveProduct(ProductDto productDto) {
+        //TODO crear registro en mongo
+        return ProductDto.builder()
+                .id(UUID.randomUUID())
+                .build();
+
+    }
+
+    @Override
+    public void updateProduct(UUID productId, ProductDto productDto) {
+        //TODO implementar update
     }
 }

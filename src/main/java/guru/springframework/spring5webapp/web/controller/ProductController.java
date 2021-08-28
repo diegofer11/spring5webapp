@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.UUID;
 
 @RequestMapping("/api/v1/product")
@@ -24,7 +25,7 @@ public class ProductController {
     }
 
     @PostMapping
-    public ResponseEntity<ProductDto> postProduct(@RequestBody ProductDto productDto) {
+    public ResponseEntity<ProductDto> postProduct(@Valid @RequestBody ProductDto productDto) {
         ProductDto savedProduct = productService.saveProduct(productDto);
         HttpHeaders headers = new HttpHeaders();
         //TODO se debe buscar la mejor forma de obtener el hostname
@@ -34,7 +35,7 @@ public class ProductController {
     }
 
     @PutMapping("/{productId}")
-    public ResponseEntity<ProductDto> putProduct(@PathVariable UUID productId, @RequestBody ProductDto productDto) {
+    public ResponseEntity<ProductDto> putProduct(@PathVariable UUID productId, @Valid @RequestBody ProductDto productDto) {
 
         productService.updateProduct(productId, productDto);
 

@@ -1,5 +1,7 @@
 package guru.springframework.spring5webapp.web.services;
 
+import guru.springframework.spring5webapp.entities.Product;
+import guru.springframework.spring5webapp.repositories.ProductRepository;
 import guru.springframework.spring5webapp.web.model.ProductDto;
 import org.springframework.stereotype.Service;
 
@@ -7,6 +9,12 @@ import java.util.UUID;
 
 @Service
 public class ProductServiceImpl implements ProductService {
+    private final ProductRepository productRepository;
+
+    public ProductServiceImpl(ProductRepository productRepository) {
+        this.productRepository = productRepository;
+    }
+
     @Override
     public ProductDto getProductById(UUID productId) {
         //TODO buscar registro no quemado
@@ -19,12 +27,9 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ProductDto saveProduct(ProductDto productDto) {
+    public Product saveProduct(Product product) {
         //TODO crear registro en mongo
-        return ProductDto.builder()
-                .id(UUID.randomUUID())
-                .build();
-
+        return productRepository.save(product);
     }
 
     @Override

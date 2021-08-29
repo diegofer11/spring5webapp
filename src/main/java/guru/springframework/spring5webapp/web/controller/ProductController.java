@@ -1,5 +1,6 @@
 package guru.springframework.spring5webapp.web.controller;
 
+import guru.springframework.spring5webapp.entities.Product;
 import guru.springframework.spring5webapp.web.model.ProductDto;
 import guru.springframework.spring5webapp.web.services.ProductService;
 import org.springframework.http.HttpHeaders;
@@ -25,10 +26,9 @@ public class ProductController {
     }
 
     @PostMapping
-    public ResponseEntity<ProductDto> postProduct(@Valid @RequestBody ProductDto productDto) {
-        ProductDto savedProduct = productService.saveProduct(productDto);
+    public ResponseEntity<ProductDto> postProduct(@Valid @RequestBody Product product) {
+        Product savedProduct = productService.saveProduct(product);
         HttpHeaders headers = new HttpHeaders();
-        //TODO se debe buscar la mejor forma de obtener el hostname
         headers.add("Location", "http://localhost:8080/api/v1/product/" + savedProduct.getId().toString());
 
         return new ResponseEntity<>(headers, HttpStatus.CREATED);

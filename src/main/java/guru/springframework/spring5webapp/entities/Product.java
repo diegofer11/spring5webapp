@@ -1,7 +1,7 @@
 package guru.springframework.spring5webapp.entities;
 
 import lombok.*;
-import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.util.UUID;
@@ -15,8 +15,8 @@ import java.util.UUID;
 public class Product {
     @Id
     @GeneratedValue(generator = "UUID")
-    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
-    @Column(name = "id", nullable = false)
+    @Type(type = "uuid-char")
+    @Column(columnDefinition = "BINARY(16)")
     private UUID id;
     private String name;
     private String sku;

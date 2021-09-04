@@ -17,7 +17,6 @@ public class HelloSender {
 
     @Scheduled(fixedRate = 2000)
     public void sendMessage() {
-        System.out.println("sending message");
 
         HelloWorldMessage message = HelloWorldMessage.builder()
                 .id(UUID.randomUUID())
@@ -25,7 +24,5 @@ public class HelloSender {
                 .build();
 
         jmsTemplate.convertAndSend(JmsConfig.MY_QUEUE, message);
-
-        System.out.println("finished sending");
     }
 }
